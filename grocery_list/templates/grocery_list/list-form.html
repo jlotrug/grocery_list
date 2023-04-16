@@ -1,0 +1,17 @@
+{% extends 'grocery_list/base.html' %}
+{% block body %}
+
+
+
+<div class="list-form">
+    <h1>Create A New List</h1>
+
+    <form method="POST" action={% url 'grocery_list:create_list' %}>
+        {% csrf_token %}
+        <label for="">Name:</label> <br>
+        <input type="text" name="name">
+        <br> <br> <button class="btn form-btn" type='submit'>Done</button>
+    </form>
+</div>
+
+{% endblock %}
