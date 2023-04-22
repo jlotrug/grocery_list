@@ -120,4 +120,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = 'grocery_list:home'
+LOGOUT_REDIRECT_URL = 'grocery_list:home'
 LOGIN_URL = 'login'
+
