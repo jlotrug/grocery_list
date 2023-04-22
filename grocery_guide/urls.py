@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from grocery_list import views
+from django.contrib.auth import views as authentication_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    
+    path('login/', authentication_views.LoginView.as_view(template_name='grocery_list/login.html'), name='login'),
     path("grocery_list/", include('grocery_list.urls')),
     
 ]

@@ -16,6 +16,9 @@ class List(models.Model):
     list_name = models.CharField(max_length=200)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.list_name
+
 class ListItem(models.Model):
     item_id = models.ForeignKey(Item, on_delete=models.CASCADE)
     list_id = models.ForeignKey(List, on_delete=models.CASCADE)

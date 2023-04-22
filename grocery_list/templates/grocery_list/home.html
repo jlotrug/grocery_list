@@ -2,10 +2,11 @@
 {% block body %}
 
     <div class="container">
-    {{lists}}
+    {% for list in lists %}
+        {{list}}
+
+    {% endfor %}
 
     </div>
-
-
 
 {% endblock %}

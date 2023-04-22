@@ -7,9 +7,10 @@ def home(request):
 
     if request.user.is_authenticated:
 
-        # lists = List.objects.get(user= request.user)
+        #print(List.objects.get(user= request.user))
+        lists = List.objects.filter(user= request.user)
 
-        return render(request, 'grocery_list/home.html', {'lists': 'list'})
+        return render(request, 'grocery_list/home.html', {'lists': lists})
 
     return render(request, 'grocery_list/home.html')
 
@@ -19,6 +20,8 @@ def create_list(request):
 
     if request.method == 'POST':
         name = request.POST.get('name', '')
+        new_list = List.objects.create(list_name=name, user=request.user)
+        new_list.save()
 
         print(name)
 
