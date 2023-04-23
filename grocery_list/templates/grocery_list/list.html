@@ -7,7 +7,31 @@
 {% for item in items %}
 
     <div class="list-div">
-        <a href="{% url 'grocery_list:item' item.id  %}" class="list-link"><h3 class="list-link">{{item.item_name}}</h3></a>
+        <div class="row">
+            <div class="col-md-2 offset-md-3">
+                <img src="{{item.item_image}}" class="list-image" alt="">
+            </div>
+            <div class="col-md-3">
+                <a href="{% url 'grocery_list:item' item.id  %}" class="list-link"><h3 class="list-link">{{item.item_name}}</h3></a>
+                <div class="list-item-details">
+                    <h6>Calories: 10</h6>
+                    <h6>Price: $10.33</h6>
+                </div>
+                
+                
+            </div>
+            <div class="col-md-1">
+                <form action="" method='POST'>
+                    {% csrf_token %}
+                    <input type="hidden" name="item" value="{{item.id}}">
+                    <input type="hidden" name='req-type' value="to-delete">
+                    <button class="btn delete-item">X</button>
+                </form>
+                
+            </div>
+        </div>
+        
+        </div>
     </div>
     
 
@@ -21,9 +45,8 @@
             <option value="{{item.id}}">{{item.item_name}}</option>
 
         {% endfor %}
-    
+        <input type="hidden" name="req-type" value="to-post">
     </select> <br>
-    <input type="hidden" name="list" value = {{list.id}}>
     <button class="btn add-item">Add</button>
 </form>
 

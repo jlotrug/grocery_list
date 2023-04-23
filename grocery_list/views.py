@@ -34,20 +34,30 @@ def create_list(request):
 
 def grocery_list(request, id):
 
-    if request.method == 'POST':
-        item_id = request.POST.get('new_item', '')
-        new_item = Item.objects.get(id=item_id)
-        list = List.objects.get(id=id)
-
-        ListItem.objects.create(item_id=new_item, list_id=list )
-
     list = List.objects.get(id=id)
+
+    if request.method == 'POST':
+        req_type = request.POST.get('req-type', '')
+
+        if req_type == 'to-delete':
+            item_id = request.POST.get('item', '')
+            item = Item.objects.get(id=item_id)
+            list_item = ListItem.objects.get(item_id=item, list_id=list)
+            list_item.delete()
+        else:
+            item_id = request.POST.get('new_item', '')
+            new_item = Item.objects.get(id=item_id)
+            # list = List.objects.get(id=id)
+            ListItem.objects.create(item_id=new_item, list_id=list )
+
+    
     items = list.items.all()
     all_items = Item.objects.filter(user=request.user)
     list_total = get_list_total(items)
     calorie_count = get_list_calorie_count(items)
 
     return render(request,'grocery_list/list.html' ,{'items': items, 'list': list, 'all_items': all_items, 'list_total': list_total, 'calories': calorie_count})
+
 
 
 def create_item(request):
@@ -62,6 +72,9 @@ def create_item(request):
         price = request.POST.get('price', '')
         price = Decimal(price)
         image = request.POST.get('image', '')
+
+        if image == '':
+            image = 'https://liftlearning.com/wp-content/uploads/2020/09/default-image.png'
 
         new_item = Item.objects.create(
             item_name = name,

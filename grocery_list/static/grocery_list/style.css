@@ -23,6 +23,16 @@ p.optional{
     font-size: 15px;
 }
 
+.list-image{
+    width: 80px;
+    height: 80px;
+}
+
+.list-item-details{
+    text-align: left;
+    padding-left: 20px;
+}
+
 .title{
     text-decoration: underline;
     margin-top: 20px;
@@ -30,7 +40,7 @@ p.optional{
 
 div.list-div{
     width: 40%;
-    margin: auto;
+    margin: 40px auto 40px;
 }
 
 .list-link:hover{
@@ -42,6 +52,10 @@ div.list-div{
 .list-link{
     color: black;
     /* font-family: 'Courier New', Courier, monospace; */
+}
+
+h3.list-link{
+    display: inline;
 }
 
 .list-info{
@@ -69,6 +83,15 @@ button.add-item{
     width: 70px;
     font-weight: bold;
     margin-top: 5px;
+}
+button.delete-item{
+    border: 1px solid black;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: 35px;
+    width: 35px;
+    align-items: center;
 }
 
 .navbar a{
