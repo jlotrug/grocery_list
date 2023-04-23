@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Item, ListItem, List
 from django.views.generic.edit import CreateView
 from decimal import Decimal
+from .helper_functions.view_functions import get_list_total, get_list_calorie_count
 
 def home(request):
 
@@ -43,8 +44,10 @@ def grocery_list(request, id):
     list = List.objects.get(id=id)
     items = list.items.all()
     all_items = Item.objects.filter(user=request.user)
+    list_total = get_list_total(items)
+    calorie_count = get_list_calorie_count(items)
 
-    return render(request,'grocery_list/list.html' ,{'items': items, 'list': list, 'all_items': all_items})
+    return render(request,'grocery_list/list.html' ,{'items': items, 'list': list, 'all_items': all_items, 'list_total': list_total, 'calories': calorie_count})
 
 
 def create_item(request):

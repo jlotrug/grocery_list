@@ -44,6 +44,10 @@ div.list-div{
     /* font-family: 'Courier New', Courier, monospace; */
 }
 
+.list-info{
+    margin-top: 50px;
+}
+
 label{
     font-size: 30px;
 }
@@ -61,7 +65,7 @@ button.form-btn{
 
 button.add-item{
     border: 1px solid black;
-    font-size: 12px;
+    font-size: 15px;
     width: 70px;
     font-weight: bold;
     margin-top: 5px;
