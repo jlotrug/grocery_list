@@ -17,7 +17,7 @@
         <a href="{% url 'grocery_list:home' %}" class="navbar-brand">Grocery Guide</a>
         <div class="navbar">
             <a href="{% url 'grocery_list:create_list' %}" class="nav-item nav-link">Create List</a>
-            <a href="#" class="nav-item nav-link">Delete Item</a>
+            <a href="{% url 'grocery_list:create_item' %}" class="nav-item nav-link">Add Item</a>
             <a href="#" class="nav-item nav-link">View Item</a>
             {% if user.is_authenticated %}
                 <a href="#" class="nav-item nav-link">Profile</a>

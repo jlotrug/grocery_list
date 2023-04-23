@@ -8,8 +8,48 @@
     margin: 20px;
 }
 
+.item-form {
+    margin: 20px;
+    font-size: 15px;
+}
+
+.item-form label {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+p.optional{
+    display: inline;
+    font-size: 15px;
+}
+
+.title{
+    text-decoration: underline;
+    margin-top: 20px;
+}
+
+div.list-div{
+    width: 40%;
+    margin: auto;
+}
+
+.list-link:hover{
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.list-link{
+    color: black;
+    /* font-family: 'Courier New', Courier, monospace; */
+}
+
 label{
     font-size: 30px;
+}
+
+.add-item-select{
+    padding: 7px;
 }
 
 button.form-btn{
@@ -19,6 +59,14 @@ button.form-btn{
     font-weight: bold;
 }
 
+button.add-item{
+    border: 1px solid black;
+    font-size: 12px;
+    width: 70px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
 .navbar a{
     color: black;
 }
@@ -26,6 +74,10 @@ button.form-btn{
 .navbar a:hover{
     color: black;
     font-weight: bold;
+}
+
+.container{
+    text-align: center;
 }
 
 

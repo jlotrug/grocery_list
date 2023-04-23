@@ -1,12 +1,13 @@
 {% extends 'grocery_list/base.html' %}
 {% block body %}
 
-    <div class="container">
-    {% for list in lists %}
-        {{list}}
+        <h1>Your Lists</h1>
+        
+        {% for list in lists %}
 
-    {% endfor %}
-
-    </div>
+                <div class="list-div">
+                    <a href="{% url 'grocery_list:g_list' list.id  %}" class="list-link"><h3 class="list-link">{{list}}</h3></a>
+                </div>
+            {% endfor %}
 
 {% endblock %}

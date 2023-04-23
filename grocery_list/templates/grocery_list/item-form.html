@@ -1,0 +1,40 @@
+{% extends 'grocery_list/base.html' %}
+{% block body %}
+
+<div class="item-form">
+    <h1>Add An Item</h1>
+
+    <form method="POST" action={% url 'grocery_list:create_item' %}>
+        {% csrf_token %}
+
+        <label for="">Item Name:</label> <br>
+        <input type="text" name="name"> <br>
+
+        <label for="">Carbs:</label> <br>
+        <input type="text" name="carbs"> <br>
+
+        <label for="">Fat:</label> <br>
+        <input type="text" name="fat"> <br>
+
+        <label for="">Protein:</label> <br>
+        <input type="text" name="protein"> <br>
+
+        <label for="">Calories:</label> <br>
+        <input type="text" name="calories"> <br>
+
+        <label for="">Notes<p class="optional">(optional)</p>:</label> <br>
+        <textarea type="text" name="notes"></textarea> <br>
+
+        <label for="">Price:</label> <br>
+        <input type="text" name="price"> <br>
+
+        <label for="">Image<p class="optional">(optional)</p>: </label> <br>
+        <input type="text" name="image">
+
+        <br> <br> <button class="btn form-btn" type='submit'>Done</button>
+    </form>
+</div>
+
+
+
+{% endblock %}

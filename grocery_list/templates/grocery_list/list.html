@@ -1,0 +1,32 @@
+{% extends 'grocery_list/base.html' %}
+{% block body %}
+
+
+<h1 class="title" >{{list}}</h1>
+
+{% for item in items %}
+
+    <div class="list-div">
+        <a href="{% url 'grocery_list:item' item.id  %}" class="list-link"><h3 class="list-link">{{item.item_name}}</h3></a>
+    </div>
+    
+
+{% endfor %}
+
+<form action="" method='POST'>
+    {% csrf_token %}
+    <select name="new_item" id="user_items" class="add-item-select" required>
+        <option disabled selected value>Add Item</option>
+        {% for item in all_items %}
+            <option value="{{item.id}}">{{item.item_name}}</option>
+
+        {% endfor %}
+    
+    </select> <br>
+    <input type="hidden" name="list" value = {{list.id}}>
+    <button class="btn add-item">Add</button>
+</form>
+
+
+
+{% endblock %}
