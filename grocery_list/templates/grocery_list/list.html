@@ -14,8 +14,8 @@
             <div class="col-md-3">
                 <a href="{% url 'grocery_list:item' item.id  %}" class="list-link"><h3 class="list-link">{{item.item_id.item_name}}</h3></a>
                 <div class="list-item-details">
-                    <h6>Calories: {{item.item_id.item_calories}}</h6>
-                    <h6>Price: {{item.item_id.item_price}}</h6>
+                    <h6>Calories: {{item.total_calories}}</h6>
+                    <h6>Price: {{item.total_cost}}</h6>
                     <h6>Quantity: {{item.quantity}}</h6>
                 </div>
                 

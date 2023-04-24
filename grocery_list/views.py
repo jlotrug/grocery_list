@@ -61,8 +61,8 @@ def grocery_list(request, id):
     items = list.items.all()
     list_items = ListItem.objects.filter(list_id=list)
     all_items = Item.objects.filter(user=request.user)
-    list_total = get_list_total(items)
-    calorie_count = get_list_calorie_count(items)
+    list_total = get_list_total(list_items)
+    calorie_count = get_list_calorie_count(list_items)
 
     for li in list_items:
         print(li.item_id.item_name)

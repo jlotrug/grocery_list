@@ -24,3 +24,9 @@ class ListItem(models.Model):
     item_id = models.ForeignKey(Item, on_delete=models.CASCADE)
     list_id = models.ForeignKey(List, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
+
+    def total_cost(self):
+        return self.quantity * self.item_id.item_price
+    
+    def total_calories(self):
+        return self.quantity * int(self.item_id.item_calories)
