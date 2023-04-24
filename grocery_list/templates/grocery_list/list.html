@@ -4,18 +4,19 @@
 
 <h1 class="title" >{{list}}</h1>
 
-{% for item in items %}
+{% for item in list_items %}
 
     <div class="list-div">
         <div class="row">
             <div class="col-md-2 offset-md-3">
-                <img src="{{item.item_image}}" class="list-image" alt="">
+                <img src="{{item.item_id.item_image}}" class="list-image" alt="">
             </div>
             <div class="col-md-3">
-                <a href="{% url 'grocery_list:item' item.id  %}" class="list-link"><h3 class="list-link">{{item.item_name}}</h3></a>
+                <a href="{% url 'grocery_list:item' item.id  %}" class="list-link"><h3 class="list-link">{{item.item_id.item_name}}</h3></a>
                 <div class="list-item-details">
-                    <h6>Calories: 10</h6>
-                    <h6>Price: $10.33</h6>
+                    <h6>Calories: {{item.item_id.item_calories}}</h6>
+                    <h6>Price: {{item.item_id.item_price}}</h6>
+                    <h6>Quantity: {{item.quantity}}</h6>
                 </div>
                 
                 
@@ -54,4 +55,7 @@
     <h2>List Total: ${{list_total}}</h2>
     <h2>Total Calories: {{calories}}</h2>
 </div>
+
+
 {% endblock %}
+

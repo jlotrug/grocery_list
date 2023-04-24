@@ -41,22 +41,33 @@ def grocery_list(request, id):
 
         if req_type == 'to-delete':
             item_id = request.POST.get('item', '')
-            item = Item.objects.get(id=item_id)
-            list_item = ListItem.objects.get(item_id=item, list_id=list)
+            list_item = ListItem.objects.get(id=item_id)
+            
             list_item.delete()
         else:
             item_id = request.POST.get('new_item', '')
             new_item = Item.objects.get(id=item_id)
+            matching_items = ListItem.objects.filter(item_id=new_item, list_id=list)
+            # print(matching_items[0].quantity)
+            if len(matching_items) > 0:
+
+                matching_items[0].quantity += 1
+                matching_items[0].save()
+            else:
             # list = List.objects.get(id=id)
-            ListItem.objects.create(item_id=new_item, list_id=list )
+                ListItem.objects.create(item_id=new_item, list_id=list )
 
     
     items = list.items.all()
+    list_items = ListItem.objects.filter(list_id=list)
     all_items = Item.objects.filter(user=request.user)
     list_total = get_list_total(items)
     calorie_count = get_list_calorie_count(items)
 
-    return render(request,'grocery_list/list.html' ,{'items': items, 'list': list, 'all_items': all_items, 'list_total': list_total, 'calories': calorie_count})
+    for li in list_items:
+        print(li.item_id.item_name)
+
+    return render(request,'grocery_list/list.html' ,{'list': list, 'all_items': all_items, 'list_total': list_total, 'calories': calorie_count, 'list_items': list_items})
 
 
 

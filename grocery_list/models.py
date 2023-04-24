@@ -23,3 +23,4 @@ class List(models.Model):
 class ListItem(models.Model):
     item_id = models.ForeignKey(Item, on_delete=models.CASCADE)
     list_id = models.ForeignKey(List, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)

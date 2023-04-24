@@ -30,7 +30,8 @@ p.optional{
 
 .list-item-details{
     text-align: left;
-    padding-left: 20px;
+    padding-left: 30px;
+    margin-top: 2px;
 }
 
 .title{
