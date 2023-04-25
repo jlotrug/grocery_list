@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Item, ListItem, List
 from django.views.generic.edit import CreateView
 from decimal import Decimal
+from django.contrib import messages
 from .helper_functions.view_functions import get_list_total, get_list_calorie_count
 
 def home(request):
@@ -18,6 +19,10 @@ def home(request):
 
 def create_list(request):
 
+    if not request.user.is_authenticated:
+        messages.warning(request, f'Please login to continue')
+        return redirect('/login')
+
     if request.method == 'POST':
         name = request.POST.get('name', '')
         new_list = List.objects.create(
@@ -33,6 +38,10 @@ def create_list(request):
     return render(request, 'grocery_list/list-form.html')
 
 def grocery_list(request, id):
+
+    if not request.user.is_authenticated:
+        messages.warning(request, f'Please login to continue')
+        return redirect('/login')
 
     list = List.objects.get(id=id)
 
@@ -73,6 +82,10 @@ def grocery_list(request, id):
 
 def create_item(request):
 
+    if not request.user.is_authenticated:
+        messages.warning(request, f'Please login to continue')
+        return redirect('/login')
+
     if request.method == 'POST':
         name = request.POST.get('name', '')
         carbs = request.POST.get('carbs', '')
@@ -107,12 +120,21 @@ def create_item(request):
     return render(request, 'grocery_list/item-form.html')
 
 def item_details(request, id):
+
+    if not request.user.is_authenticated:
+        messages.warning(request, f'Please login to continue')
+        return redirect('/login')
+
     item = Item.objects.get(id=id)
 
     return render(request, 'grocery_list/item.html', {'item': item})
 
 
 def all_items(request):
+    
+    if not request.user.is_authenticated:
+        messages.warning(request, f'Please login to continue')
+        return redirect('/login')
 
     if request.method == 'POST':
         item_id = request.POST.get('item', '')
