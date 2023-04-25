@@ -60,8 +60,12 @@ def grocery_list(request, id):
 
         if req_type == 'to-delete':
             item_id = request.POST.get('item', '')
-            list_item = ListItem.objects.get(id=item_id)            
-            list_item.delete()
+            list_item = ListItem.objects.get(id=item_id)
+            if list_item.quantity > 1:
+                list_item.quantity -= 1
+                list_item.save()
+            else:
+                list_item.delete()
         else:
             item_id = request.POST.get('new_item', '')
             new_item = Item.objects.get(id=item_id)

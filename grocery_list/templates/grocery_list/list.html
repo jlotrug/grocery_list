@@ -26,7 +26,11 @@
                     {% csrf_token %}
                     <input type="hidden" name="item" value="{{item.id}}">
                     <input type="hidden" name='req-type' value="to-delete">
-                    <button class="btn delete-item">X</button>
+                    {% if item.quantity > 1 %}
+                        <button class="btn delete-item">-</button>
+                    {% else %}
+                        <button class="btn delete-item">X</button>
+                    {% endif %}
                 </form>
                 
             </div>
