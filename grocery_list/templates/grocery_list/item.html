@@ -3,37 +3,32 @@
 
 <div class="detail-item">
 
-
-
-
-
  {% comment %} <div class="row">
     <div class="col-md-2 offset-md-3"> {% endcomment %}
+        <h1 class="title-item-details">{{item.item_name}}</h1> 
         <img src="{{item.item_image}}" class="detail-image" alt="">
     {% comment %} </div> {% endcomment %}
 
-        <h3 class="">{{item.item_name}}</h3>
+        {% comment %} <h3 class="title-item-details">{{item.item_name}}</h3> <span class="edit-item">Edit</span> {% endcomment %}
         <div class="item-details">
+            
             <h4>Calories: {{item.item_calories}}</h4>
             <h4>Price: {{item.item_price}}</h4>
             <h4>Protein: {{item.item_protien}}</h4>
             <h4>Fat: {{item.item_fat}}</h4>
             <h4>Carbs: {{item.item_carbs}} </h4>
             <h4>Notes:</h4> 
-            <div class="item-notes">
-                <p class="item-notes-p">{{item.item_notes}}</p>
+            {% if not item.item_notes  == '' %}
+            <div class="item-notes">                
+                    <p class="item-notes-p">{{item.item_notes}}</p>                
             </div>
-            
+            {% endif %}
         </div>
-            
-            
+            <a class="btn form-btn" href="{% url 'grocery_list:edit' item.id%}" class="edit-item">Edit</a>
+{% comment %}             
         <div class="col-md-1">
             
-        </div>
-    </div>
-        
+        </div> {% endcomment %}
+    </div>     
 </div>
-
-
-
 {% endblock %}

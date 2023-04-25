@@ -153,3 +153,40 @@ def all_items(request):
 
     return render(request, 'grocery_list/all-items.html', {'items': items})
 
+
+def edit_item(request, id):
+
+    if not request.user.is_authenticated:
+        messages.warning(request, f'Please login to continue')
+        return redirect('/login')
+
+    item = Item.objects.get(id=id)
+
+    if request.method == 'POST':
+        name = request.POST.get('name', '')
+        carbs = request.POST.get('carbs', '')
+        fat = request.POST.get('fat', '')
+        protein = request.POST.get('protein', '')
+        calories = request.POST.get('calories', '')
+        notes = request.POST.get('notes', '')
+        price = request.POST.get('price', '')
+        price = Decimal(price)
+        image = request.POST.get('image', '')
+
+        if image == '':
+            image = 'https://liftlearning.com/wp-content/uploads/2020/09/default-image.png'
+
+        item.item_calories = calories
+        item.item_name = name
+        item.item_carbs = carbs
+        item.item_fat = fat
+        item.item_protein = protein
+        item.item_notes = notes
+        item.item_price = price
+        item.item_image = image
+        item.save()
+
+        return redirect('/grocery_list/item/' + str(item.id))
+
+
+    return render(request, 'grocery_list/edit-item.html', {'item': item})

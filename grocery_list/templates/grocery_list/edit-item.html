@@ -1,0 +1,40 @@
+{% extends 'grocery_list/base.html' %}
+{% block body %}
+    <div class="item-form">
+        <h1>Edit Item</h1>
+
+        <form action="" method='POST'>
+             {% csrf_token %}
+
+            <label for="">Item Name:</label> <br>
+            <input type="text" name="name" value={{item.item_name}}> <br>
+
+            <label for="">Carbs:</label> <br>
+            <input type="text" name="carbs" value={{item.item_carbs}}> <br>
+
+            <label for="">Fat:</label> <br>
+            <input type="text" name="fat" value={{item.item_fat}}> <br>
+
+            <label for="">Protein:</label> <br>
+            <input type="text" name="protein" value={{item.item_protein}}> <br>
+
+            <label for="">Calories:</label> <br>
+            <input type="text" name="calories" value={{item.item_calories}}> <br>
+
+            <label for="">Notes<p class="optional">(optional)</p>:</label> <br>
+            <textarea type="text" name="notes">{{item.item_notes}}</textarea> <br>
+
+            <label for="">Price:</label> <br>
+            <input type="text" name="price" value={{item.item_price}}> <br>
+
+            <label for="">Image<p class="optional">(optional)</p>: </label> <br>
+            {% if item.item_image == 'https://liftlearning.com/wp-content/uploads/2020/09/default-image.png' %}
+                <input type="text" name="image" placeholder='url...'>
+            {% else %}
+                <input type="text" name="image" value={{item.item_image}} placeholder='url...'>
+            {% endif %}
+            <br> <br> <button class="btn form-btn" type='submit'>Done</button>
+        
+        </form>
+    </div>
+{% endblock %}
