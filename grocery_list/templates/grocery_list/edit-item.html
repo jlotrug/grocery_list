@@ -1,6 +1,11 @@
 {% extends 'grocery_list/base.html' %}
 {% block body %}
-    <div class="item-form">
+    {% comment %} <div class="item-form"> {% endcomment %}
+
+    <div class="item-form row offset-2">
+
+    <div class="col-md-3 new-item-form-2"></div>
+    <div class="col-md-3 new-item-form">
         <h1>Edit Item</h1>
 
         <form action="" method='POST'>
@@ -37,4 +42,13 @@
         
         </form>
     </div>
+
+    <div class="col-md-3 error-list " style="{% if error_list|length < 1 %} display: none; {% endif %}">
+        {% for error in error_list %}
+            <h6> {{error}} </h6>
+
+        {% endfor %}
+    
+    </div>
+</div>
 {% endblock %}

@@ -90,7 +90,69 @@ def grocery_list(request, id):
 
     return render(request,'grocery_list/list.html' ,{'list': list, 'all_items': all_items, 'list_total': list_total, 'calories': calorie_count, 'list_items': list_items})
 
+def edit_item(request, id):
 
+    if not request.user.is_authenticated:
+        messages.warning(request, f'Please login to continue')
+        return redirect('/login')
+
+    item = Item.objects.get(id=id)
+
+    if request.method == 'POST':
+        name = request.POST.get('name', '')
+        carbs = request.POST.get('carbs', '')
+        fat = request.POST.get('fat', '')
+        protein = request.POST.get('protein', '')
+        calories = request.POST.get('calories', '')
+        notes = request.POST.get('notes', '')
+        price = request.POST.get('price', '')
+        if price == '':
+            price = '0'
+        if price.replace('.', '', 1).isnumeric():
+            price = Decimal(price)
+            price_error = ''
+        else:
+            price = 0
+            price_error = "Price must be numeric"
+        image = request.POST.get('image', '')
+
+        new_item = Item(
+            item_name = name,
+            item_carbs = carbs,
+            item_fat = fat,
+            item_protein = protein,
+            item_calories = calories,
+            item_notes = notes,
+            item_price = price,
+            item_image = image,
+            user = request.user
+        )
+
+        error_list = get_error_list(new_item)
+
+        if not price_error == '':
+            error_list.append(price_error)
+
+        if len(error_list) > 0:
+            return render(request, 'grocery_list/edit-item.html', {'item': new_item, 'error_list': error_list})
+
+        if image == '':
+            image = 'https://liftlearning.com/wp-content/uploads/2020/09/default-image.png'
+
+        item.item_calories = calories
+        item.item_name = name
+        item.item_carbs = carbs
+        item.item_fat = fat
+        item.item_protein = protein
+        item.item_notes = notes
+        item.item_price = price
+        item.item_image = image
+        item.save()
+
+        return redirect('/grocery_list/item/' + str(item.id))
+
+
+    return render(request, 'grocery_list/edit-item.html', {'item': item})
 
 def create_item(request):
 
@@ -133,19 +195,6 @@ def create_item(request):
         if not price_error == '':
             error_list.append(price_error)
 
-
-        # new_item = Item.objects.create(
-        #     item_name = name,
-        #     item_carbs = carbs,
-        #     item_fat = fat,
-        #     item_protein = protein,
-        #     item_calories = calories,
-        #     item_notes = notes,
-        #     item_price = price,
-        #     item_image = image,
-        #     user = request.user
-        # )
-
         if len(error_list) > 0:
             return render(request, 'grocery_list/item-form.html', {'item': new_item, 'error_list': error_list})
 
@@ -184,39 +233,4 @@ def all_items(request):
     return render(request, 'grocery_list/all-items.html', {'items': items})
 
 
-def edit_item(request, id):
 
-    if not request.user.is_authenticated:
-        messages.warning(request, f'Please login to continue')
-        return redirect('/login')
-
-    item = Item.objects.get(id=id)
-
-    if request.method == 'POST':
-        name = request.POST.get('name', '')
-        carbs = request.POST.get('carbs', '')
-        fat = request.POST.get('fat', '')
-        protein = request.POST.get('protein', '')
-        calories = request.POST.get('calories', '')
-        notes = request.POST.get('notes', '')
-        price = request.POST.get('price', '')
-        price = Decimal(price)
-        image = request.POST.get('image', '')
-
-        if image == '':
-            image = 'https://liftlearning.com/wp-content/uploads/2020/09/default-image.png'
-
-        item.item_calories = calories
-        item.item_name = name
-        item.item_carbs = carbs
-        item.item_fat = fat
-        item.item_protein = protein
-        item.item_notes = notes
-        item.item_price = price
-        item.item_image = image
-        item.save()
-
-        return redirect('/grocery_list/item/' + str(item.id))
-
-
-    return render(request, 'grocery_list/edit-item.html', {'item': item})

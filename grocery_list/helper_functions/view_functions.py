@@ -16,6 +16,7 @@ def get_list_calorie_count(items):
 
 def get_error_list(item):
     error_list = []
+    print(item.item_protein)
 
     if not item.item_carbs.isnumeric():
         error_list.append("Carbs must be a numeric value")
