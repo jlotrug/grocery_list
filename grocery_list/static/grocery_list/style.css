@@ -28,6 +28,19 @@
     padding: 15px;
 }
 
+.item-notes{
+    border: 1px dashed black;
+    max-width: 20%;
+    margin: auto;
+    min-height: 150px;
+    text-align: left;
+    padding: 10px;
+}
+
+.item-notes-p{
+    font-size: 18px;
+}
+
 
 .list-form{
     margin: 20px;

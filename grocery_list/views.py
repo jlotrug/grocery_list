@@ -111,6 +111,19 @@ def item_details(request, id):
 
     return render(request, 'grocery_list/item.html', {'item': item})
 
+
+def all_items(request):
+
+    if request.method == 'POST':
+        item_id = request.POST.get('item', '')
+        item = Item.objects.get(id=item_id)
+
+        item.delete()
+
+    items = Item.objects.filter(user=request.user)
+
+    return render(request, 'grocery_list/all-items.html', {'items': items})
+
 # class ListCreate(CreateView):
 #     model = List
 #     fields = ['list_name']
