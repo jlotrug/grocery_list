@@ -1,38 +1,54 @@
 {% extends 'grocery_list/base.html' %}
 {% block body %}
 
-<div class="item-form">
-    <h1>Add An Item</h1>
+<div class="item-form row offset-2">
 
-    <form method="POST" action={% url 'grocery_list:create_item' %}>
-        {% csrf_token %}
+    <div class="col-md-3 new-item-form-2"></div>
+    
 
-        <label for="">Item Name:</label> <br>
-        <input type="text" name="name"> <br>
+    <div class="col-md-3 new-item-form">
+        <h1>Add An Item</h1>
+    
+        <form method="POST" action={% url 'grocery_list:create_item' %}>
+            {% csrf_token %}
 
-        <label for="">Carbs:</label> <br>
-        <input type="text" name="carbs"> <br>
+            <label for="">Item Name:</label> <br>
+                <input type="text" name="name" value={{item.item_name}}> <br>
 
-        <label for="">Fat:</label> <br>
-        <input type="text" name="fat"> <br>
+                <label for="">Carbs:</label> <br>
+                <input type="text" name="carbs" value={{item.item_carbs}}> <br>
 
-        <label for="">Protein:</label> <br>
-        <input type="text" name="protein"> <br>
+                <label for="">Fat:</label> <br>
+                <input type="text" name="fat" value={{item.item_fat}}> <br>
 
-        <label for="">Calories:</label> <br>
-        <input type="text" name="calories"> <br>
+                <label for="">Protein:</label> <br>
+                <input type="text" name="protein" value={{item.item_protein}}> <br>
 
-        <label for="">Notes<p class="optional">(optional)</p>:</label> <br>
-        <textarea type="text" name="notes"></textarea> <br>
+                <label for="">Calories:</label> <br>
+                <input type="text" name="calories" value={{item.item_calories}}> <br>
 
-        <label for="">Price:</label> <br>
-        <input type="text" name="price"> <br>
+                <label for="">Notes<p class="optional">(optional)</p>:</label> <br>
+                <textarea type="text" name="notes">{{item.item_notes}}</textarea> <br>
 
-        <label for="">Image<p class="optional">(optional)</p>: </label> <br>
-        <input type="text" name="image" placeholder='url...'>
+                <label for="">Price:</label> <br>
+                <input type="text" name="price" value={{item.item_price}}> <br>
 
-        <br> <br> <button class="btn form-btn" type='submit'>Done</button>
-    </form>
+                <label for="">Image<p class="optional">(optional)</p>: </label> <br>
+                {% if item.item_image == 'https://liftlearning.com/wp-content/uploads/2020/09/default-image.png' %}
+                    <input type="text" name="image" placeholder='url...'>
+                {% else %}
+                    <input type="text" name="image" value="{{item.item_image}}" placeholder='url...'>
+                {% endif %}
+                <br> <br> <button class="btn form-btn" type='submit'>Done</button>
+        </form>
+    </div>
+    <div class="col-md-3 error-list " style="{% if error_list|length < 1 %} display: none; {% endif %}">
+        {% for error in error_list %}
+            <h6> {{error}} </h6>
+
+        {% endfor %}
+    
+    </div>
 </div>
 
 

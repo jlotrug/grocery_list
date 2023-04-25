@@ -4,7 +4,7 @@ from .forms import RegistrationForm
 from django.views.generic.edit import CreateView
 from decimal import Decimal
 from django.contrib import messages
-from .helper_functions.view_functions import get_list_total, get_list_calorie_count
+from .helper_functions.view_functions import get_list_total, get_list_calorie_count, get_error_list
 
 def home(request):
     if not request.user.is_authenticated:
@@ -99,6 +99,7 @@ def create_item(request):
         return redirect('/login')
 
     if request.method == 'POST':
+
         name = request.POST.get('name', '')
         carbs = request.POST.get('carbs', '')
         fat = request.POST.get('fat', '')
@@ -106,13 +107,17 @@ def create_item(request):
         calories = request.POST.get('calories', '')
         notes = request.POST.get('notes', '')
         price = request.POST.get('price', '')
-        price = Decimal(price)
-        image = request.POST.get('image', '')
+        if price == '':
+            price = '0'
+        if price.replace('.', '', 1).isnumeric():
+            price = Decimal(price)
+            price_error = ''
+        else:
+            price = 0
+            price_error = "Price must be numeric"
+        image = request.POST.get('image', '')        
 
-        if image == '':
-            image = 'https://liftlearning.com/wp-content/uploads/2020/09/default-image.png'
-
-        new_item = Item.objects.create(
+        new_item = Item(
             item_name = name,
             item_carbs = carbs,
             item_fat = fat,
@@ -124,10 +129,31 @@ def create_item(request):
             user = request.user
         )
 
+        error_list = get_error_list(new_item)
+        if not price_error == '':
+            error_list.append(price_error)
+
+
+        # new_item = Item.objects.create(
+        #     item_name = name,
+        #     item_carbs = carbs,
+        #     item_fat = fat,
+        #     item_protein = protein,
+        #     item_calories = calories,
+        #     item_notes = notes,
+        #     item_price = price,
+        #     item_image = image,
+        #     user = request.user
+        # )
+
+        if len(error_list) > 0:
+            return render(request, 'grocery_list/item-form.html', {'item': new_item, 'error_list': error_list})
+
+        if new_item.item_image == '':
+            new_item.item_image = 'https://liftlearning.com/wp-content/uploads/2020/09/default-image.png'
+
         new_item.save()
         return redirect('/grocery_list/item/' + str(new_item.id))
-
-
 
     return render(request, 'grocery_list/item-form.html')
 

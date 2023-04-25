@@ -2,6 +2,29 @@
     background-color: lightyellow;
     text-align: center;
     font-family: 'Courier New', Courier, monospace;
+    margin-bottom: 50px;
+}
+
+/* Add Item Form */
+.error-list{
+    /* border: 1px solid black; */
+    margin-top: 10%;
+    padding-top: 10px;
+    color: white;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: black;
+    height: 35%;
+    border-radius: 10%;
+
+}
+
+.new-item-form{
+    /* border: 2px solid black; */
+}
+
+.new-item-form-2{
+    /* border: 2px solid black; */
 }
 
 /* Detail Page */
@@ -70,7 +93,8 @@ h1.title-item-details{
 }
 
 .item-form {
-    margin: 20px;
+
+    margin-top: 20px;
     font-size: 15px;
 }
 
