@@ -1,20 +1,30 @@
 from django.shortcuts import render, redirect
 from .models import Item, ListItem, List
+from .forms import RegistrationForm
 from django.views.generic.edit import CreateView
 from decimal import Decimal
 from django.contrib import messages
 from .helper_functions.view_functions import get_list_total, get_list_calorie_count
 
 def home(request):
+    if not request.user.is_authenticated:
+        messages.warning(request, f'Please login to continue')
+        return redirect('/login')
 
-    if request.user.is_authenticated:
+    lists = List.objects.filter(user= request.user)
 
-        #print(List.objects.get(user= request.user))
-        lists = List.objects.filter(user= request.user)
+    return render(request, 'grocery_list/home.html', {'lists': lists})
 
-        return render(request, 'grocery_list/home.html', {'lists': lists})
 
-    return render(request, 'grocery_list/home.html')
+def register(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            return redirect('login')
+
+    return render(request, 'grocery_list/register.html')
 
 
 def create_list(request):
@@ -50,20 +60,18 @@ def grocery_list(request, id):
 
         if req_type == 'to-delete':
             item_id = request.POST.get('item', '')
-            list_item = ListItem.objects.get(id=item_id)
-            
+            list_item = ListItem.objects.get(id=item_id)            
             list_item.delete()
         else:
             item_id = request.POST.get('new_item', '')
             new_item = Item.objects.get(id=item_id)
             matching_items = ListItem.objects.filter(item_id=new_item, list_id=list)
-            # print(matching_items[0].quantity)
+
             if len(matching_items) > 0:
 
                 matching_items[0].quantity += 1
                 matching_items[0].save()
             else:
-            # list = List.objects.get(id=id)
                 ListItem.objects.create(item_id=new_item, list_id=list )
 
     
@@ -131,7 +139,7 @@ def item_details(request, id):
 
 
 def all_items(request):
-    
+
     if not request.user.is_authenticated:
         messages.warning(request, f'Please login to continue')
         return redirect('/login')
@@ -139,16 +147,9 @@ def all_items(request):
     if request.method == 'POST':
         item_id = request.POST.get('item', '')
         item = Item.objects.get(id=item_id)
-
         item.delete()
 
     items = Item.objects.filter(user=request.user)
 
     return render(request, 'grocery_list/all-items.html', {'items': items})
 
-# class ListCreate(CreateView):
-#     model = List
-#     fields = ['list_name']
-#     template_name= 'grocery_list/list-form.html'
-
-#     print("Hello World")

@@ -124,6 +124,21 @@ button.form-btn{
     font-weight: bold;
 }
 
+a.create-account-btn{
+    border: 2px solid black;
+    font-size: 20px;
+    margin: 20px;
+    width: 250px;
+    font-weight: bold;
+}
+
+.signup-form{
+    text-align: right;
+    width: 23%;
+    margin: auto;
+    /* border:  5px solid black; */
+}
+
 button.add-item{
     border: 1px solid black;
     font-size: 15px;
@@ -143,6 +158,7 @@ button.delete-item{
 
 .navbar a{
     color: black;
+    margin-left: 15px;
 }
 
 .navbar a:hover{

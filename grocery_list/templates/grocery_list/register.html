@@ -12,20 +12,30 @@
     
 </head>
 <body class="main-background">
-    <h1>Login</h1>
+    <h1>Create An Account</h1>
     <form action="" method="POST">
         {% csrf_token %}
 
-        <label for="">Username: </label>
-        <input name="username" type="text"> <br>
+        <div class="signup-form">
+            <label for="">Username: </label>
+            <input name="username" type="text"> <br>
 
-        <label for="">Password: </label>
-        <input name="password" type="password"> <br>
+            <label for="">Email: </label>
+            <input name="email" type="text"> <br>
 
-        <button type="submit" class="btn form-btn">Login</button>
+            <label for="">Password: </label>
+            <input name="password1" type="password"> <br>
+
+            <label for=""> Confirm: </label>
+            <input name="password2" type="password"> <br>
+         </div>
+        
+        <button type="submit" class="btn form-btn">Create</button>
+       
+        
             
     </form> 
-    {% if messages %}
+    {% comment %} {% if messages %}
         {% for message in messages %}
             <div class="alert alert-{{message.tags}} login-alert">
                 <h2>{{message}}</h2>            
@@ -33,7 +43,7 @@
 
         {% endfor %}
     {% endif %}
-    <a href="{% url 'register'%}" class="btn create-account-btn">Create New Account</a>
+    <a class="btn create-account-btn">Create New Account</a> {% endcomment %}
 
 </body>
 </html>

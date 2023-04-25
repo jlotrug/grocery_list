@@ -18,9 +18,8 @@
         <div class="navbar">
             <a href="{% url 'grocery_list:create_list' %}" class="nav-item nav-link">Create List</a>
             <a href="{% url 'grocery_list:create_item' %}" class="nav-item nav-link">Add Item</a>
-            <a href="{% url 'grocery_list:all_items'%}" class="nav-item nav-link">All Items</a>
+            <a href="{% url 'grocery_list:all_items'%}" class="nav-item nav-link">All Your Items</a>
             {% if user.is_authenticated %}
-                <a href="#" class="nav-item nav-link">Profile</a>
                 <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
             {% else %}
                 <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
