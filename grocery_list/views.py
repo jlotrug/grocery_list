@@ -11,8 +11,7 @@ def home(request):
     if not request.user.is_authenticated:
         messages.warning(request, f'Please login to continue')
         return redirect('/login')
-    
-    
+        
     if request.method == 'POST':
         list_id = request.POST.get('list', '')
         list = List.objects.get(id=list_id)
@@ -94,9 +93,6 @@ def grocery_list(request, id):
     page = request.GET.get('page')
     list_items = paginator.get_page(page)
 
-    for li in list_items:
-        print(li.item_id.item_name)
-
     return render(request,'grocery_list/list.html' ,{'list': list, 'all_items': all_items, 'list_total': list_total, 'calories': calorie_count, 'list_items': list_items})
 
 def edit_item(request, id):
@@ -142,11 +138,15 @@ def edit_item(request, id):
         if not price_error == '':
             error_list.append(price_error)
 
+        if image == '':
+            image = 'https://liftlearning.com/wp-content/uploads/2020/09/default-image.png'
+        new_item.item_image = image
+
         if len(error_list) > 0:
             return render(request, 'grocery_list/edit-item.html', {'item': new_item, 'error_list': error_list})
 
-        if image == '':
-            image = 'https://liftlearning.com/wp-content/uploads/2020/09/default-image.png'
+        # if image == '':
+        #     image = 'https://liftlearning.com/wp-content/uploads/2020/09/default-image.png'
 
         item.item_calories = calories
         item.item_name = name
@@ -159,7 +159,6 @@ def edit_item(request, id):
         item.save()
 
         return redirect('/grocery_list/item/' + str(item.id))
-
 
     return render(request, 'grocery_list/edit-item.html', {'item': item})
 

@@ -7,7 +7,6 @@
 
 /* Add Item Form */
 .error-list{
-    /* border: 1px solid black; */
     margin-top: 10%;
     padding-top: 10px;
     color: white;
@@ -28,13 +27,6 @@
     font-size: 18px;
 }
 
-.new-item-form{
-    /* border: 2px solid black; */
-}
-
-.new-item-form-2{
-    /* border: 2px solid black; */
-}
 
 /* Detail Page */
 .detail-item{
@@ -51,7 +43,6 @@
 
 h1.title-item-details{
     font-weight: bold;
-    /* display: inline; */
 }
 
 .edit-item{
@@ -67,13 +58,7 @@ h1.title-item-details{
 }
 
 .item-details{
-    /* text-align: left; */
-    /* width: auto; */
-    /* margin: auto; */
-    /* border: 4px solid black; */
-
     font-size: 30px;
-    /* font-weight: bold; */
     padding: 15px;
 }
 
@@ -93,7 +78,6 @@ h1.title-item-details{
 .login-alert{
     width: 40%;
     margin: 20px auto 20px;
-
 }
 
 
@@ -148,7 +132,6 @@ div.list-div{
 
 .list-link{
     color: black;
-    /* font-family: 'Courier New', Courier, monospace; */
 }
 
 h3.list-link{
@@ -196,7 +179,6 @@ a.create-account-btn{
     text-align: right;
     width: 23%;
     margin: auto;
-    /* border:  5px solid black; */
 }
 
 button.add-item{
