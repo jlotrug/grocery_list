@@ -6,7 +6,18 @@
         {% for list in lists %}
 
                 <div class="list-div">
-                    <a href="{% url 'grocery_list:g_list' list.id  %}" class="list-link"><h3 class="list-link">{{list}}</h3></a>
+                    <div class="row offset-md-4">
+                        <div class="col-md-5 ">
+                            <a href="{% url 'grocery_list:g_list' list.id  %}" class="list-link"><h3 class="list-link">{{list}}</h3></a>
+                        </div>
+                        <div class="col-md-1">
+                            <form action="" method='POST'>
+                                {% csrf_token %}
+                                <input type="hidden" name="list" value="{{list.id}}">                            
+                                <button class="btn delete-item">X</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             {% endfor %}
 

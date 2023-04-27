@@ -10,7 +10,12 @@ def home(request):
     if not request.user.is_authenticated:
         messages.warning(request, f'Please login to continue')
         return redirect('/login')
-
+    
+    if request.method == 'POST':
+        list_id = request.POST.get('list', '')
+        list = List.objects.get(id=list_id)
+        list.delete()
+        
     lists = List.objects.filter(user= request.user)
 
     return render(request, 'grocery_list/home.html', {'lists': lists})
