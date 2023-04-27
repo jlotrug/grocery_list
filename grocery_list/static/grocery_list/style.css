@@ -19,6 +19,15 @@
 
 }
 
+.p-link{
+    font-weight: bold;
+}
+
+.page-section{
+    margin-top: 5px;
+    font-size: 18px;
+}
+
 .new-item-form{
     /* border: 2px solid black; */
 }

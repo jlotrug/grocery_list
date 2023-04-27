@@ -55,6 +55,22 @@
     <button class="btn add-item">Add</button>
 </form>
 
+<div class="page-section">
+    {% if list_items.has_previous%}
+        <a href="?page=1" class="list-link p-link"> << </a>
+        <a href="?page={{ list_items.previous_page_number }}" class="list-link p-link"> < </a>
+
+    {% endif %}
+
+    Page: {{ list_items.number}} of {{ list_items.paginator.num_pages }}
+
+    {% if list_items.has_next%}
+        <a href="?page={{ list_items.next_page_number }}" class="list-link p-link"> > </a>
+        <a href="?page={{list_items.paginator.num_pages}}" class="list-link p-link"> >> </a>
+
+    {% endif %}
+</div>
+
 <div class="list-info">
     <h2>List Total: ${{list_total}}</h2>
     <h2>Total Calories: {{calories}}</h2>

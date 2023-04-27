@@ -5,11 +5,13 @@ from django.views.generic.edit import CreateView
 from decimal import Decimal
 from django.contrib import messages
 from .helper_functions.view_functions import get_list_total, get_list_calorie_count, get_error_list
+from django.core.paginator import Paginator
 
 def home(request):
     if not request.user.is_authenticated:
         messages.warning(request, f'Please login to continue')
         return redirect('/login')
+    
     
     if request.method == 'POST':
         list_id = request.POST.get('list', '')
@@ -87,6 +89,10 @@ def grocery_list(request, id):
     all_items = Item.objects.filter(user=request.user)
     list_total = get_list_total(list_items)
     calorie_count = get_list_calorie_count(list_items)
+
+    paginator = Paginator(list_items, 5)
+    page = request.GET.get('page')
+    list_items = paginator.get_page(page)
 
     for li in list_items:
         print(li.item_id.item_name)
