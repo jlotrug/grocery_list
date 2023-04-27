@@ -1,3 +1,5 @@
+
+# Gets list price total
 def get_list_total(items):
     total = 0
 
@@ -6,6 +8,7 @@ def get_list_total(items):
 
     return total
 
+# Gets list calorie total
 def get_list_calorie_count(items):
     total = 0
 
@@ -14,6 +17,7 @@ def get_list_calorie_count(items):
 
     return total
 
+# Validates user input
 def get_error_list(item):
     error_list = []
     print(item.item_protein)
