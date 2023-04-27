@@ -41,9 +41,7 @@ def create_list(request):
             )
         new_list.save()
 
-        print(name)
-
-        return redirect('/grocery_list')
+        return redirect('/grocery_list/' + str(new_list.id))
 
     return render(request, 'grocery_list/list-form.html')
 
