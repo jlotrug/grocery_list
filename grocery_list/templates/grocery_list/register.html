@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Create Account</title>
     <link rel="stylesheet" href="{% static 'grocery_list/style.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     
@@ -17,7 +17,6 @@
         {% csrf_token %}
 
         <div class="signup-form">
-        {% comment %} <div class="inner-form"> {% endcomment %}
             <label class="signup-label" for="">Username: </label>
             <input name="username" type="text"> <br>
 
@@ -33,8 +32,6 @@
         
         <button type="submit" class="btn form-btn register-submit">Create</button>
        </div>
-        
-            
     </form> 
     {% comment %} {% if messages %}
         {% for message in messages %}

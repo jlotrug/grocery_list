@@ -75,7 +75,13 @@ h1.title-item-details{
 
 .login-alert{
     width: 40%;
-    margin: 20px auto 20px;
+    margin: 10px auto 10px;
+    /* margin: auto; */
+    color: red;
+}
+
+.login-screen{
+    margin-top: 10px;
 }
 
 

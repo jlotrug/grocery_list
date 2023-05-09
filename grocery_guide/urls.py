@@ -22,7 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='root'),
     path('register/', views.register, name='register'),
-    path('login/', authentication_views.LoginView.as_view(template_name='grocery_list/login.html'), name='login'),
+    # path('login/', authentication_views.LoginView.as_view(template_name='grocery_list/login.html'), name='login'),
+    path('login/', views.login, name='login'),
     path('logout/', authentication_views.LogoutView.as_view(), name='logout'),
     path("grocery_list/", include('grocery_list.urls')),    
 ]

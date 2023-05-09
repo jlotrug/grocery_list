@@ -3,7 +3,8 @@ from .models import Item, ListItem, List
 from .forms import RegistrationForm
 from django.views.generic.edit import CreateView
 from decimal import Decimal
-from django.contrib import messages
+from django.contrib import messages, auth
+from django.contrib.auth import authenticate
 from .helper_functions.view_functions import get_list_total, get_list_calorie_count, get_error_list
 from django.core.paginator import Paginator
 
@@ -22,6 +23,19 @@ def home(request):
 
     return render(request, 'grocery_list/home.html', {'lists': lists})
 
+def login(request):
+    print("Hello May Ninth")
+    if request.POST:
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            auth.login(request, user)
+            return redirect('/')
+        else:
+            messages.error(request, 'Username or password is incorrect')
+            messages.error(request, 'Please try again')
+    return render(request, 'grocery_list/login.html', {})
 
 def register(request):
     if request.method == 'POST':
