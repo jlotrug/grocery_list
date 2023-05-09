@@ -17,21 +17,22 @@
         {% csrf_token %}
 
         <div class="signup-form">
-            <label for="">Username: </label>
+        {% comment %} <div class="inner-form"> {% endcomment %}
+            <label class="signup-label" for="">Username: </label>
             <input name="username" type="text"> <br>
 
-            <label for="">Email: </label>
+            <label class="signup-label" for="">Email: </label>
             <input name="email" type="text"> <br>
 
-            <label for="">Password: </label>
+            <label class="signup-label" for="">Password: </label>
             <input name="password1" type="password"> <br>
 
-            <label for=""> Confirm: </label>
+            <label class="signup-label" for=""> Confirm: </label>
             <input name="password2" type="password"> <br>
          </div>
         
-        <button type="submit" class="btn form-btn">Create</button>
-       
+        <button type="submit" class="btn form-btn register-submit">Create</button>
+       </div>
         
             
     </form> 

@@ -176,7 +176,22 @@ a.create-account-btn{
 .signup-form{
     text-align: right;
     width: 23%;
+    /* width: 50%; */
     margin: auto;
+}
+
+@media (max-width:1673px){
+    .signup-form{
+        text-align: center;
+        width: 20%;
+    }
+    .signup-label{
+        display: inline;
+    }
+
+    .register-submit{
+        margin-top: 5px;
+    }
 }
 
 button.add-item{
