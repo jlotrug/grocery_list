@@ -44,8 +44,13 @@ def register(request):
         # Validates signup info and saves user
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('username')
-            return redirect('login')
+            # username = form.cleaned_data.get('username')
+            # password = form.cleaned_data.get('password')
+            username = request.POST['username']
+            password = request.POST['password1']
+            user = authenticate(username=username, password=password)
+            auth.login(request, user)
+            return redirect('/')
 
     return render(request, 'grocery_list/register.html')
 
